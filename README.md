@@ -6,7 +6,7 @@ A modern e-commerce web application built with Streamlit, featuring an integrate
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## 🌟 Features
+##  Features
 
 - **Product Showcase**: Display 6 premium bag products with high-quality images
 - **AI Customer Support**: Integrated Botpress chatbot for real-time customer assistance
@@ -14,7 +14,7 @@ A modern e-commerce web application built with Streamlit, featuring an integrate
 - **Interactive Shopping**: Add-to-cart functionality with instant feedback
 - **Modern UI**: Clean, professional design with custom CSS styling
 
-## 📦 Products Featured
+##  Products Featured
 
 1. **Classic Leather Tote** - $129.99
 2. **Designer Backpack** - $89.99
@@ -23,7 +23,7 @@ A modern e-commerce web application built with Streamlit, featuring an integrate
 5. **Crossbody Bag** - $79.99
 6. **Business Briefcase** - $199.99
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -53,7 +53,7 @@ streamlit run main.py
 http://localhost:8501
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 soft_skills/
@@ -70,14 +70,14 @@ soft_skills/
 └── README.md           # This file
 ```
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **[Streamlit](https://streamlit.io/)** - Web application framework
 - **[Botpress](https://botpress.com/)** - AI chatbot platform
 - **Python 3.12** - Programming language
 - **HTML/CSS** - Custom styling and chatbot integration
 
-## 💬 Chatbot Integration
+##  Chatbot Integration
 
 The application uses Botpress Cloud's webchat widget for customer support. The chatbot features:
 
@@ -93,7 +93,7 @@ The chatbot is configured in `main.py` with:
 - Client ID: `55df48d2-4f03-4dbb-bc17-e1068b13137b`
 - Custom styling to fit seamlessly in the layout
 
-## 🎨 Customization
+##  Customization
 
 ### Adding Your Own Images
 
@@ -114,30 +114,3 @@ Modify the product sections in `main.py`:
 - Change product names, prices, and descriptions
 - Update image paths
 - Adjust button labels and messages
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
-## 👤 Author
-
-**Your Name**
-- GitHub: [@god-s-lonely-man](https://github.com/god-s-lonely-man)
-
-## 📞 Support
-
-For support, email support@bagstore.com or join our community chat.
-
-## 🙏 Acknowledgments
-
-- Product images from [Unsplash](https://unsplash.com/)
-- Chatbot powered by [Botpress](https://botpress.com/)
-- Built with [Streamlit](https://streamlit.io/)
-
----
-
-⭐ Star this repo if you find it helpful!
