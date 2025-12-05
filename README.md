@@ -6,6 +6,12 @@ A modern e-commerce web application built with Streamlit, featuring an integrate
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+##  Preview
+
+![Homepage Preview](assets/homepage.png)
+
+*Premium Bag Store with integrated AI customer support chatbot*
+
 ##  Features
 
 - **Product Showcase**: Display 6 premium bag products with high-quality images
