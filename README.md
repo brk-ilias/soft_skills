@@ -1,35 +1,51 @@
-# 👜 Premium Bag Store - Streamlit Application
+# 👜 Premium Bag Store - Multi-Page Streamlit Application
 
-A modern e-commerce web application built with Streamlit, featuring an integrated AI-powered customer support chatbot using Botpress.
+A fully functional e-commerce web application built with Streamlit featuring AI-powered customer support via Botpress, complete shopping cart, and order management.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-##  Preview
+## ✨ Features
 
-![Homepage Preview](assets/homepage.png)
+### 🏠 Home Page (`main.py`)
+- Attractive landing page with hero section
+- Featured products showcase
+- Customer testimonials
+- Newsletter subscription
+- Quick stats and metrics
+- Real-time cart indicator
 
-*Premium Bag Store with integrated AI customer support chatbot*
+### 🛍️ Shop Page
+- Complete product catalog with 8+ products
+- Search functionality
+- Category filtering (Tote Bags, Backpacks, Clutches, Travel Bags, Crossbody, Briefcases)
+- Product ratings and reviews
+- Add to cart with quantity selection
+- Responsive grid layout
 
-##  Features
+### 🛒 Shopping Cart
+- View all cart items
+- Update quantities or remove items
+- Real-time price calculations
+- Full checkout form with validation
+- Order confirmation with balloons animation
+- Clear cart functionality
 
-- **Product Showcase**: Display 6 premium bag products with high-quality images
-- **AI Customer Support**: Integrated Botpress chatbot for real-time customer assistance
-- **Responsive Design**: Wide layout optimized for desktop viewing
-- **Interactive Shopping**: Add-to-cart functionality with instant feedback
-- **Modern UI**: Clean, professional design with custom CSS styling
+### 💬 Customer Support
+- Integrated Botpress AI chatbot (24/7)
+- Comprehensive FAQ section with expandable items
+- Contact form
+- Business hours and contact information
+- Multiple contact methods (email, phone, address)
 
-##  Products Featured
+### 📦 Order History
+- View all past orders
+- Detailed order information
+- Customer and shipping details
+- Order status tracking
 
-1. **Classic Leather Tote** - $129.99
-2. **Designer Backpack** - $89.99
-3. **Evening Clutch** - $59.99
-4. **Travel Duffle** - $149.99
-5. **Crossbody Bag** - $79.99
-6. **Business Briefcase** - $199.99
-
-##  Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -59,22 +75,33 @@ streamlit run main.py
 http://localhost:8501
 ```
 
-##  Project Structure
+## 📁 Project Structure
 
 ```
 soft_skills/
-├── main.py              # Main Streamlit application
-├── requirements.txt     # Python dependencies
-├── assets/             # Product images and resources
-│   ├── README.md       # Asset documentation
-│   ├── leather_tote.jpg
-│   ├── designer_backpack.jpg
-│   ├── evening_clutch.jpg
-│   ├── travel_duffle.jpg
-│   ├── crossbody_bag.jpg
-│   └── business_briefcase.jpg
-└── README.md           # This file
+├── main.py                 # Home/Landing page
+├── pages/
+│   ├── 1_🛍️_Shop.py      # Product catalog & shopping
+│   ├── 2_🛒_Cart.py       # Shopping cart & checkout
+│   ├── 3_💬_Support.py    # Customer support with AI chatbot
+│   └── 4_📦_Orders.py     # Order history
+├── utils/
+│   ├── product_data.py    # Product catalog and search functions
+│   └── cart_manager.py    # Cart operations and checkout logic
+├── requirements.txt        # Python dependencies
+└── README.md              # This file
 ```
+
+## 🛒 Products Featured
+
+1. **Classic Leather Tote** - $129.99 ⭐4.5 (128 reviews)
+2. **Designer Backpack** - $89.99 ⭐4.7 (256 reviews)
+3. **Evening Clutch** - $59.99 ⭐4.3 (89 reviews)
+4. **Travel Duffle** - $149.99 ⭐4.8 (342 reviews)
+5. **Crossbody Bag** - $79.99 ⭐4.6 (175 reviews)
+6. **Business Briefcase** - $199.99 ⭐4.9 (421 reviews)
+7. **Canvas Tote** - $39.99 ⭐4.2 (93 reviews)
+8. **Mini Backpack** - $69.99 ⭐4.4 (167 reviews)
 
 ##  Technologies Used
 

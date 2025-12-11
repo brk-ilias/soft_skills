@@ -1,189 +1,301 @@
 import streamlit as st
-import streamlit.components.v1 as components
-from pathlib import Path
-import os
+from utils.cart_manager import initialize_cart, get_cart_count
+from utils.product_data import get_all_products
+
+# Initialize session state
+initialize_cart()
 
 # Page configuration
-st.set_page_config(
-    page_title="Bag Store - Customer Support", page_icon="👜", layout="wide"
-)
+st.set_page_config(page_title="Premium Bag Store - Home", page_icon="👜", layout="wide")
 
 # Custom CSS
 st.markdown(
     """
 <style>
     .main-header {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
         text-align: center;
         color: #3276EA;
         margin-bottom: 1rem;
     }
-    .product-card {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .hero-section {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        color: white;
+        margin-bottom: 30px;
     }
-    .price {
-        font-size: 1.5rem;
+    /* Feature / Testimonial cards: ensure readable text on light backgrounds */
+    .feature-card {
+        border: 1px solid #e6e6e6;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.06);
+        background-color: #ffffff;
+        color: #222222; /* dark text for contrast */
+        height: 100%;
+    }
+    .feature-card h3 {
+        color: #111111;
+        margin-bottom: 8px;
+    }
+    .feature-card p {
+        color: #333333;
+        margin-bottom: 0.5rem;
+    }
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .cta-button {
+        background-color: #3276EA;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 10px;
+        font-size: 1.2rem;
         font-weight: bold;
-        color: #3276EA;
+        border: none;
+        cursor: pointer;
+    }
+    .product-preview {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    .product-preview:hover {
+        transform: scale(1.05);
+    }
+    .cart-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #3276EA;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 </style>
 """,
     unsafe_allow_html=True,
 )
 
+# Cart indicator
+cart_count = get_cart_count()
+if cart_count > 0:
+    st.markdown(
+        f'<div class="cart-indicator">🛒 {cart_count} items</div>',
+        unsafe_allow_html=True,
+    )
+
 # Header
 st.markdown('<h1 class="main-header">👜 Premium Bag Store</h1>', unsafe_allow_html=True)
+
+# Hero Section
 st.markdown(
-    '<p style="text-align: center; font-size: 1.2rem; color: #666;">Find your perfect bag with our AI-powered customer support</p>',
+    """
+    <div class="hero-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Welcome to Your Bag Destination</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+            Discover premium quality bags for every occasion. From elegant clutches to professional briefcases.
+        </p>
+    </div>
+    """,
     unsafe_allow_html=True,
 )
 
-# Main content area
-col1, col2 = st.columns([2, 1])
-
-with col1:
-    st.header("Our Collection")
-
-    # Product showcase
-    prod_col1, prod_col2, prod_col3 = st.columns(3)
-
-    with prod_col1:
-        img_path = "assets/leather_tote.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Classic Leather Tote**")
-        st.markdown('<p class="price">$129.99</p>', unsafe_allow_html=True)
-        st.write("Premium leather construction with spacious interior")
-        if st.button("Add to Cart", key="bag1"):
-            st.success("Added to cart!")
-
-    with prod_col2:
-        img_path = "assets/designer_backpack.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Designer Backpack**")
-        st.markdown('<p class="price">$89.99</p>', unsafe_allow_html=True)
-        st.write("Modern design with laptop compartment")
-        if st.button("Add to Cart", key="bag2"):
-            st.success("Added to cart!")
-
-    with prod_col3:
-        img_path = "assets/evening_clutch.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Evening Clutch**")
-        st.markdown('<p class="price">$59.99</p>', unsafe_allow_html=True)
-        st.write("Elegant design perfect for special occasions")
-        if st.button("Add to Cart", key="bag3"):
-            st.success("Added to cart!")
-
-    st.markdown("---")
-
-    # Additional products
-    prod_col4, prod_col5, prod_col6 = st.columns(3)
-
-    with prod_col4:
-        img_path = "assets/travel_duffle.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Travel Duffle**")
-        st.markdown('<p class="price">$149.99</p>', unsafe_allow_html=True)
-        st.write("Durable travel companion with multiple compartments")
-        if st.button("Add to Cart", key="bag4"):
-            st.success("Added to cart!")
-
-    with prod_col5:
-        img_path = "assets/crossbody_bag.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1564422170194-896b89110ef8?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Crossbody Bag**")
-        st.markdown('<p class="price">$79.99</p>', unsafe_allow_html=True)
-        st.write("Perfect for hands-free convenience")
-        if st.button("Add to Cart", key="bag5"):
-            st.success("Added to cart!")
-
-    with prod_col6:
-        img_path = "assets/business_briefcase.jpg"
-        if not os.path.exists(img_path):
-            img_path = "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop"
-        st.image(img_path, width="stretch")
-        st.markdown("**Business Briefcase**")
-        st.markdown('<p class="price">$199.99</p>', unsafe_allow_html=True)
-        st.write("Professional leather briefcase for business")
-        if st.button("Add to Cart", key="bag6"):
-            st.success("Added to cart!")
-
-with col2:
-    st.header("💬 Customer Support")
-    st.write("Have questions? Chat with our AI assistant!")
-
-    # Botpress chatbot integration
-    chatbot_html = """
-    <head>
-        <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
-        <style>
-          #webchat .bpWebchat {
-            position: unset;
-            width: 100%;
-            height: 100%;
-            max-height: 100%;
-            max-width: 100%;
-          }
-
-          #webchat .bpFab {
-            display: none;
-          }
-        </style>
-    </head>
-    <body>
-        <div id="webchat" style="width: 100%; height: 600px;"></div>
-        <script>
-          window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
-          });
-          window.botpress.init({
-          "botId": "b64a1f4f-ff95-49e0-8eee-eb8241cabb3c",
-          "configuration": {
-            "version": "v2",
-            "botName": "Customer Support Agent",
-            "botDescription": "",
-            "website": {},
-            "email": {},
-            "phone": {},
-            "termsOfService": {},
-            "privacyPolicy": {},
-            "color": "#3276EA",
-            "variant": "solid",
-            "headerVariant": "glass",
-            "themeMode": "light",
-            "fontFamily": "inter",
-            "radius": 4,
-            "feedbackEnabled": false,
-            "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-            "soundEnabled": false,
-            "proactiveMessageEnabled": false,
-            "proactiveBubbleMessage": "Hi! 👋 Need help?",
-            "proactiveBubbleTriggerType": "afterDelay",
-            "proactiveBubbleDelayTime": 10
-          },
-          "clientId": "55df48d2-4f03-4dbb-bc17-e1068b13137b",
-          "selector": "#webchat"
-        });
-        </script>
-    </body>
+# Hero Section
+st.markdown(
     """
+    <div class="hero-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Welcome to Your Bag Destination</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 30px;">
+            Discover premium quality bags for every occasion. From elegant clutches to professional briefcases.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-    components.html(chatbot_html, height=650, scrolling=False)
+# CTA Buttons
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    col_shop, col_support = st.columns(2)
+    with col_shop:
+        if st.button("🛍️ Start Shopping", use_container_width=True, type="primary"):
+            st.switch_page("pages/1_🛍️_Shop.py")
+    with col_support:
+        if st.button("💬 Get Support", use_container_width=True):
+            st.switch_page("pages/3_💬_Support.py")
+
+st.markdown("---")
+
+# Features Section
+st.markdown("### ✨ Why Choose Us?")
+feat_col1, feat_col2, feat_col3, feat_col4 = st.columns(4)
+
+with feat_col1:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Premium Quality</h3>
+            <p>Handcrafted bags made from the finest materials</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with feat_col2:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Free Shipping</h3>
+            <p>Free delivery on orders over $100</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with feat_col3:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <div class="feature-icon">↩️</div>
+            <h3>Easy Returns</h3>
+            <p>30-day hassle-free return policy</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with feat_col4:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>AI Support</h3>
+            <p>24/7 intelligent customer assistance</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("---")
+
+# Featured Products
+st.markdown("### 🔥 Featured Products")
+products = get_all_products()[:3]  # Show first 3 products
+
+prod_cols = st.columns(3)
+for i, product in enumerate(products):
+    with prod_cols[i]:
+        st.markdown('<div class="product-preview">', unsafe_allow_html=True)
+        st.image(product["image"], use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown(f"**{product['name']}**")
+        st.markdown(f"**${product['price']:.2f}**")
+        stars = "⭐" * int(product["rating"])
+        st.caption(f"{stars} ({product['reviews']} reviews)")
+
+col1, col2, col3 = st.columns([1, 1, 1])
+with col2:
+    if st.button("View All Products →", use_container_width=True):
+        st.switch_page("pages/1_🛍️_Shop.py")
+
+st.markdown("---")
+
+# Testimonials
+st.markdown("### 💬 What Our Customers Say")
+test_col1, test_col2, test_col3 = st.columns(3)
+
+with test_col1:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <p style="font-style: italic; margin-bottom: 15px;">
+                "Absolutely love my new leather tote! The quality is outstanding and it arrived faster than expected."
+            </p>
+            <p><strong>- Sarah M.</strong></p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with test_col2:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <p style="font-style: italic; margin-bottom: 15px;">
+                "Best online shopping experience! The AI support helped me find the perfect bag for my needs."
+            </p>
+            <p><strong>- Michael R.</strong></p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with test_col3:
+    st.markdown(
+        """
+        <div class="feature-card">
+            <p style="font-style: italic; margin-bottom: 15px;">
+                "Great selection and prices! The briefcase I bought has become my favorite work companion."
+            </p>
+            <p><strong>- Jennifer L.</strong></p>
+            <p>⭐⭐⭐⭐⭐</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("---")
+
+# Newsletter Signup
+st.markdown("### 📧 Stay Updated")
+st.write("Subscribe to our newsletter for exclusive deals and new arrivals!")
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    with st.form("newsletter_form"):
+        email = st.text_input("Email Address", placeholder="your.email@example.com")
+        subscribe = st.form_submit_button(
+            "Subscribe", use_container_width=True, type="primary"
+        )
+
+        if subscribe:
+            if email:
+                st.success("✅ Thank you for subscribing!")
+            else:
+                st.error("Please enter a valid email address")
+
+st.markdown("---")
+
+# Quick Stats
+stat_col1, stat_col2, stat_col3, stat_col4 = st.columns(4)
+
+with stat_col1:
+    st.metric("Happy Customers", "10,000+", "+1,234")
+
+with stat_col2:
+    st.metric("Products Sold", "25,000+", "+2,456")
+
+with stat_col3:
+    st.metric("Countries Served", "50+", "+3")
+
+with stat_col4:
+    st.metric("Average Rating", "4.8⭐", "+0.2")
+
 
 # Footer
 st.markdown("---")
